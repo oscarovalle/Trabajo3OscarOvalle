@@ -17,5 +17,19 @@ export class FaenaPage implements OnInit {
 
   ngOnInit() {
   }
+    faenas = [
+    {
+      id: 1,
+      nombre: 'Faena 1',
+      imagen1: 'assets/faena/Camion1.jpg',
+      imagen2: 'assets/faena/Camion2.jpg'
+    },
+    {
+      id: 2,
+      nombre: 'Faena 2',
+      imagen1: 'assets/faena/Camion2.jpg',
+      imagen2: 'assets/faena/Camion3.jpg'
+    }
+  ];
 
 }

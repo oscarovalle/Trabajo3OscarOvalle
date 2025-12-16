@@ -1,20 +1,44 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar color="light">
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/faena"></ion-back-button>
+      <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>Lista de equipos</ion-title>
+
+    <ion-title class="titulo-app">
+      Lista de equipos
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
-  <ion-button expand="block" color="success" routerLink="/detalleequipo">
-    Equipo 1
-  </ion-button>
-  <ion-button expand="block" color="success" routerLink="/detalleequipo">
-    Equipo 2
-  </ion-button>
-  <ion-button expand="block" color="success" routerLink="/detalleequipo">
-    Equipo 3
-  </ion-button>
+<ion-content class="ion-padding fondo-blanco">
+  <h1 class="titulo-principal">Seleccionar equipo:</h1>
+
+ <ion-card
+    *ngFor="let equipo of equipos"
+    class="equipo-card"
+    [routerLink]="['/detalleequipo', equipo.id]">
+
+    <!-- IMAGEN -->
+    <img [src]="equipo.imagen" class="img-equipo">
+
+    <!-- NOMBRE -->
+    <div class="nombre-equipo">
+      {{ equipo.nombre }}
+    </div>
+
+    <!-- ESTADO -->
+    <div
+      class="estado"
+      [ngClass]="{
+        'estado-operativo': equipo.estado === 'operativo',
+        'estado-fs': equipo.estado === 'fs'
+      }">
+
+      Estado:
+      {{ equipo.estado === 'operativo' ? 'Operativo' : 'F/S' }}
+
+    </div>
+
+  </ion-card>
+
 </ion-content>

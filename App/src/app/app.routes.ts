@@ -17,20 +17,20 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/faena/faena.page').then( m => m.FaenaPage)
   },
   {
-    path: 'listaequipo',
-    loadComponent: () => import('./pages/listaequipo/listaequipo.page').then( m => m.ListaequipoPage)
+  path: 'listaequipo/:idFaena',
+  loadComponent: () => import('./pages/listaequipo/listaequipo.page').then(m => m.ListaequipoPage)
   },
   {
-    path: 'detalleequipo',
-    loadComponent: () => import('./pages/detalleequipo/detalleequipo.page').then( m => m.DetalleequipoPage)
+    path: 'detalleequipo/:idEquipo',
+  loadComponent: () => import('./pages/detalleequipo/detalleequipo.page').then(m => m.DetalleequipoPage)
   },
   {
     path: 'ingresoreporte',
     loadComponent: () => import('./pages/ingresoreporte/ingresoreporte.page').then( m => m.IngresoreportePage)
   },
   {
-    path: 'reporte',
-    loadComponent: () => import('./pages/reporte/reporte.page').then( m => m.ReportePage)
+     path: 'reporte/:idReporte/:idEquipo',
+    loadComponent: () => import('./pages/reporte/reporte.page').then(m => m.ReportePage)
   },
   {
     path: 'admin',

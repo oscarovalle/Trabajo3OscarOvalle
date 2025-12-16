@@ -7,8 +7,72 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
-  <ion-button expand="block" color="success" routerLink="/detalleequipo">
-    Ingresar reporte
-  </ion-button>
+<ion-content class="ion-padding fondo-blanco">
+
+  <!-- TITULO -->
+  <h2 class="titulo-principal">
+    Ingreso reporte
+  </h2>
+
+  <!-- FECHA -->
+  <div class="grupo-form">
+    <label class="label-form">FECHA</label>
+
+    <ion-item lines="none" class="input-gris">
+      <ion-input
+        readonly
+        [value]="reporte.fecha | date:'dd/MM/yyyy'"
+        (click)="abrirCalendario()">
+      </ion-input>
+    </ion-item>
+
+    <ion-modal [isOpen]="mostrarCalendario">
+      <ion-content class="ion-padding">
+        <ion-datetime
+          presentation="date"
+          (ionChange)="seleccionarFecha($event)">
+        </ion-datetime>
+      </ion-content>
+    </ion-modal>
+  </div>
+
+  <!-- REPORTE -->
+  <div class="grupo-form">
+    <label class="label-form">REPORTE</label>
+
+    <ion-item lines="none" class="input-gris">
+      <ion-textarea
+        rows="5"
+        placeholder="Ingrese el detalle del reporte"
+        [(ngModel)]="reporte.detalle">
+      </ion-textarea>
+    </ion-item>
+  </div>
+
+  <!-- FOTOGRAFIAS -->
+  <div class="grupo-form">
+    <label class="label-form">FOTOGRAFÍA</label>
+
+    <div
+      class="foto-agregada"
+      *ngFor="let foto of fotos; let i = index">
+      Fotografía {{ i + 1 }} agregada
+    </div>
+
+    <div class="acciones">
+      <ion-button
+        shape="round"
+        color="success"
+        (click)="agregarFoto()">
+        <ion-icon name="camera-outline"></ion-icon>
+      </ion-button>
+
+      <ion-button
+        color="success"
+        (click)="confirmarEnvio()">
+        Enviar reporte
+      </ion-button>
+    </div>
+  </div>
+
 </ion-content>

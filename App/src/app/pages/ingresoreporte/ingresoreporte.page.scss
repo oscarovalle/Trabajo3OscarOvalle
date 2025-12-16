@@ -1,0 +1,42 @@
+.fondo-blanco {
+  background: #ffffff;
+}
+
+.titulo-principal {
+  text-align: center;
+  color: #8c8c8c;
+  font-weight: bold;
+  margin-bottom: 25px;
+}
+
+.grupo-form {
+  margin-bottom: 20px;
+}
+
+.label-form {
+  display: block;
+  color: #b0b0b0;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.input-gris {
+  background: #f2f2f2;
+  border-radius: 8px;
+  padding: 2px 8px;
+}
+
+.foto-agregada {
+  background: #f2f2f2;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.acciones {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-top: 10px;
+}

@@ -1,0 +1,61 @@
+.fondo-blanco {
+  --background: #ffffff;
+}
+
+.titulo-app {
+  text-align: center;
+  color: #b0b0b0;
+  font-weight: 600;
+}
+
+.titulo-principal {
+  text-align: center;
+  color: #2e7d32;
+  font-weight: bold;
+  font-size: 30px;
+  margin-bottom: 30px;
+}
+
+/* CARD */
+.equipo-card {
+  background: #f7f7f7;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  box-shadow: none;
+}
+
+/* IMAGEN */
+.img-equipo {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+/* NOMBRE */
+.nombre-equipo {
+  padding: 12px;
+  text-align: center;
+  margin-bottom: 5px;
+  font-size: 16px;
+  font-weight: 600;
+  background: #fdd673;
+  color: #000000;
+}
+
+/* ESTADO BASE */
+.estado {
+  padding: 10px;
+  text-align: center;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+/* ESTADOS */
+.estado-operativo {
+  background: #2e7d32; /* verde */
+}
+
+.estado-fs {
+  background: #c62828; /* rojo */
+}

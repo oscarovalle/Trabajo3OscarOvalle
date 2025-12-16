@@ -1,14 +1,37 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>Inicio</ion-title>
+  <ion-toolbar color="light">
+    <ion-title class="titulo-app">
+      Gestión de equipos
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
+<ion-content class="ion-padding fondo-blanco">
+  <h1 class="titulo-principal">GESTION DE EQUIPOS</h1>
+
+  <div class="logo-container">
+    <img src="assets/logo.webp" alt="Logo" class="logo">
+  </div>
+
+  <h2 class="titulo-ingreso">Ingreso</h2>
+
+  <p class="label-gris">USUARIO</p>
+  <ion-item lines="none" class="campo-input">
+    <ion-input type="text" placeholder="Ingrese usuario"></ion-input>
+  </ion-item>
+
+  <p class="label-gris">CONTRASEÑA</p>
+  <ion-item lines="none" class="campo-input">
+    <ion-input type="password" placeholder="Ingrese contraseña"></ion-input>
+  </ion-item>
+
+
   <ion-button expand="block" color="success" routerLink="/faena">
     Ingresar
   </ion-button>
-  <ion-button expand="block" color="success" routerLink="/admin">
+
+  <ion-button expand="block" fill="outline" color="success" routerLink="/admin">
     Ingresar admin
   </ion-button>
+
 </ion-content>

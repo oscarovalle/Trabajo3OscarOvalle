@@ -1,0 +1,102 @@
+.fondo-blanco {
+  --background: #ffffff;
+}
+
+/* TITULO */
+.titulo-app {
+  text-align: center;
+  color: #b0b0b0;
+  font-weight: 600;
+}
+
+/* NOMBRE EQUIPO */
+.nombre-equipo {
+  text-align: center;
+  color: #2e7d32;
+  font-weight: bold;
+  font-size: 30px;
+  margin-bottom: 30px;
+}
+
+/* ESTADO */
+.estado {
+  text-align: center;
+  padding: 8px;
+  margin: 10px 0 15px;
+  color: #ffffff;
+  font-weight: bold;
+  border-radius: 6px;
+}
+
+.estado-operativo {
+  background: #2e7d32;
+}
+
+.estado-fs {
+  background: #c62828;
+}
+
+/* IMAGEN EQUIPO */
+.img-equipo-detalle {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+/* KM Y FECHA */
+.info-km {
+  margin-bottom: 10px;
+  
+}
+
+.info-amarillo {
+  background: #ffcc00;
+  text-align: center;
+  font-weight: bold;
+  border-radius: 6px;
+  padding: 5px;
+}
+
+/* DOCUMENTOS */
+.doc-item {
+  background: #f0f0f0;
+  padding: 5px;
+  margin-bottom: 5px;
+  border-radius: 6px;
+  color: #000;
+}
+
+/* REPORTES */
+.titulo-reportes {
+  text-align: center;
+  color: #2e7d32;
+  font-weight: bold;
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+
+.reporte-card {
+  background: #f7f7f7;
+  border-radius: 10px;
+  box-shadow: none;
+  margin-bottom: 15px;
+}
+
+.img-reporte {
+  width: 100%;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.fecha-reporte {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.detalle-reporte {
+  font-size: 13px;
+  color: #333;
+}
