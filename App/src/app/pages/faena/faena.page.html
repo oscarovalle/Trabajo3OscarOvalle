@@ -1,9 +1,5 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="light">
-    <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
-    </ion-buttons>
-
     <ion-title class="titulo-app">
       Faenas
     </ion-title>
@@ -12,7 +8,7 @@
 
 <ion-content class="ion-padding fondo-blanco">
   <h1 class="titulo-principal">Seleccionar faena:</h1>
-
+  
   <ion-card *ngFor="let faena of faenas" class="faena-card">
 
     <!-- BOTÓN FAENA -->

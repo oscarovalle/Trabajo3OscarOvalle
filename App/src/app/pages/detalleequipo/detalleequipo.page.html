@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="light">
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/listaequipo"></ion-back-button>
+      <ion-back-button (click)="volver()"></ion-back-button>
     </ion-buttons>
     <ion-title class="titulo-app">Detalle equipo</ion-title>
   </ion-toolbar>
@@ -21,7 +21,7 @@
       'estado-operativo': equipo.estado === 'operativo',
       'estado-fs': equipo.estado === 'fs'
     }">
-    {{ equipo.estado === 'operativo' ? 'OPERATIVO' : 'F/S' }}
+    {{ equipo.estado === 'operativo' ? 'OPERATIVO' : 'FUERA DE SERVICIO' }}
   </div>
 
   <!-- IMAGEN -->
@@ -55,7 +55,7 @@
   </div>
 
   <!-- NUEVO REPORTE -->
-  <ion-button expand="block" color="success" routerLink="/ingresoreporte">
+  <ion-button expand="block" color="success" [routerLink]="['/ingresoreporte', equipo.id]">
     Nuevo Reporte
   </ion-button>
 
@@ -70,7 +70,7 @@
     <ion-grid>
       <ion-row>
         <ion-col size="4">
-          <img [src]="reporte.imagen" class="img-reporte">
+          <img [src]="reporte.fotos[0]" *ngIf="reporte.fotos?.length" class="img-reporte">
         </ion-col>
         <ion-col size="8">
           <div class="fecha-reporte">

@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/detalleequipo"></ion-back-button>
+      <ion-back-button (click)="volver()"></ion-back-button>
     </ion-buttons>
     <ion-title>Ingreso Reporte</ion-title>
   </ion-toolbar>
@@ -10,31 +10,34 @@
 <ion-content class="ion-padding fondo-blanco">
 
   <!-- TITULO -->
-  <h2 class="titulo-principal">
-    Ingreso reporte
-  </h2>
+  <h2 class="titulo-principal">Ingreso reporte</h2>
 
   <!-- FECHA -->
-  <div class="grupo-form">
-    <label class="label-form">FECHA</label>
+  <label class="label-form">Fecha</label>
 
-    <ion-item lines="none" class="input-gris">
-      <ion-input
-        readonly
-        [value]="reporte.fecha | date:'dd/MM/yyyy'"
-        (click)="abrirCalendario()">
-      </ion-input>
-    </ion-item>
+  <ion-item button detail="false" (click)="abrirCalendario()">
+    <ion-input
+      readonly
+      [value]="reporte.fecha | date:'dd/MM/yyyy'">
+    </ion-input>
+  </ion-item>
 
-    <ion-modal [isOpen]="mostrarCalendario">
+  <!-- MODAL CALENDARIO -->
+  <ion-modal [isOpen]="mostrarCalendario">
+    <ng-template>
       <ion-content class="ion-padding">
         <ion-datetime
           presentation="date"
+          [value]="reporte.fecha"
           (ionChange)="seleccionarFecha($event)">
         </ion-datetime>
+
+        <ion-button expand="block" (click)="cerrarCalendario()">
+          Cerrar
+        </ion-button>
       </ion-content>
-    </ion-modal>
-  </div>
+    </ng-template>
+  </ion-modal>
 
   <!-- REPORTE -->
   <div class="grupo-form">
@@ -42,9 +45,9 @@
 
     <ion-item lines="none" class="input-gris">
       <ion-textarea
-        rows="5"
         placeholder="Ingrese el detalle del reporte"
-        [(ngModel)]="reporte.detalle">
+        [(ngModel)]="reporte.detalle"
+        autoGrow="true">
       </ion-textarea>
     </ion-item>
   </div>
@@ -53,26 +56,33 @@
   <div class="grupo-form">
     <label class="label-form">FOTOGRAFÍA</label>
 
-    <div
-      class="foto-agregada"
-      *ngFor="let foto of fotos; let i = index">
-      Fotografía {{ i + 1 }} agregada
-    </div>
-
-    <div class="acciones">
-      <ion-button
-        shape="round"
-        color="success"
-        (click)="agregarFoto()">
-        <ion-icon name="camera-outline"></ion-icon>
-      </ion-button>
+    <div *ngFor="let foto of fotos; let i = index" class="foto-item">
+      <ion-input readonly value="Fotografía {{ i + 1 }}"></ion-input>
 
       <ion-button
-        color="success"
-        (click)="confirmarEnvio()">
-        Enviar reporte
+        fill="clear"
+        color="danger"
+        (click)="eliminarFoto(i)">
+        <ion-icon name="trash"></ion-icon>
       </ion-button>
     </div>
+
+    <ion-button
+      shape="round"
+      color="success"
+      [disabled]="fotos.length >= 5"
+      (click)="agregarFoto()">
+      <ion-icon slot="icon-only" name="camera"></ion-icon>
+    </ion-button>
   </div>
+
+  <!-- ENVIAR -->
+  <ion-button
+    expand="block"
+    color="success"
+    (click)="enviarReporte()">
+    Enviar reporte
+  </ion-button>
+  console.log(this.reporteService.getReportesPorEquipo(this.idEquipo));
 
 </ion-content>

@@ -4,7 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ReporteService } from '../../services/reporte.service';
+
 
 @Component({
   selector: 'app-ingresoreporte',
@@ -17,22 +19,38 @@ export class IngresoreportePage implements OnInit {
 
   mostrarCalendario = false;
 
+  idEquipo!: number;
+  equipoId!: number;
+
   reporte = {
     fecha: '',
-    detalle: ''
+    detalle: '',
+    idEquipo: 0
   };
 
   fotos: any[] = [];
 
   constructor(
     private alertCtrl: AlertController,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute,
+    private reporteService: ReporteService
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.idEquipo = Number(this.route.snapshot.paramMap.get('idEquipo'));
+    this.reporte.idEquipo = this.idEquipo;
+    const hoy = new Date().toISOString();
+    this.reporte.fecha = hoy;
+    this.equipoId = Number(this.route.snapshot.paramMap.get('idEquipo'));
+  }
 
   abrirCalendario() {
     this.mostrarCalendario = true;
+  }
+
+  cerrarCalendario() {
+    this.mostrarCalendario = false;
   }
 
   seleccionarFecha(event: any) {
@@ -41,16 +59,31 @@ export class IngresoreportePage implements OnInit {
   }
 
   agregarFoto() {
-    this.fotos.push({});
+    if (this.fotos.length < 5) {
+      this.fotos.push({});
+    }
   }
 
-  // 🔵 BOTÓN "ENVIAR REPORTE"
-  confirmarEnvio() {
-    this.mostrarConfirmacion();
+  eliminarFoto(index: number) {
+    this.fotos.splice(index, 1);
   }
 
-  // 🟡 ALERTA DE CONFIRMACIÓN
-  async mostrarConfirmacion() {
+  async enviarReporte() {
+
+    if (!this.reporte.fecha || !this.reporte.detalle.trim()) {
+      const alert = await this.alertCtrl.create({
+        header: 'Campos obligatorios',
+        message: 'Debe ingresar fecha y detalle del reporte.',
+        buttons: ['OK']
+      });
+      await alert.present();
+      return;
+    }
+
+    if (this.fotos.length > 5) {
+      return;
+    }
+
     const alert = await this.alertCtrl.create({
       header: 'Confirmación',
       message: '¿Está seguro que desea enviar el reporte?',
@@ -61,9 +94,7 @@ export class IngresoreportePage implements OnInit {
         },
         {
           text: 'Sí',
-          handler: () => {
-            this.guardarReporte();
-          }
+          handler: () => this.guardarReporte()
         }
       ]
     });
@@ -71,15 +102,21 @@ export class IngresoreportePage implements OnInit {
     await alert.present();
   }
 
-  // 🟢 GUARDAR + MENSAJE FINAL
+
   async guardarReporte() {
 
-    const data = {
-      ...this.reporte,
+    const nuevoReporte = {
+      id: Date.now(),          // mock ID
+      idEquipo: this.idEquipo,
+      fecha: this.reporte.fecha,
+      detalle: this.reporte.detalle,
       fotos: this.fotos
     };
 
-    console.log('Reporte guardado:', data);
+    console.log('Reporte guardado:', nuevoReporte);
+
+    //GUARDAR EN EL SERVICE
+    this.reporteService.agregarReporte(nuevoReporte);
 
     const alert = await this.alertCtrl.create({
       header: 'Éxito',
@@ -88,13 +125,20 @@ export class IngresoreportePage implements OnInit {
         {
           text: 'OK',
           handler: () => {
-            this.router.navigate(['/detalleequipo/1']);
+            this.router.navigate(['/detalleequipo', this.idEquipo]);
           }
         }
       ]
     });
 
     await alert.present();
-  }
+    }
+
+    volver() {
+      this.router.navigate([
+        '/detalleequipo',
+        this.equipoId
+      ]);
+    }
 
 }

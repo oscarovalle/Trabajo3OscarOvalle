@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { IonicModule} from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ReporteService } from '../../services/reporte.service';
 
 @Component({
   selector: 'app-reporte',
@@ -18,29 +19,10 @@ export class ReportePage implements OnInit {
     equipoId!: number;
     reporte: any;
 
-    reportesMock = [
-      {
-        id: 1,
-        fecha: '22/07/2025',
-        detalle: 'Falla en sistema hidráulico.',
-        imagenes: [
-          'assets/reportes/reporte1.jpg',
-          'assets/reportes/reporte2.jpg'
-        ]
-      },
-      {
-        id: 2,
-        fecha: '18/07/2025',
-        detalle: 'Cambio de filtros.',
-        imagenes: [
-          'assets/reportes/reporte2.jpg'
-        ]
-      }
-    ];
-
     constructor(
       private route: ActivatedRoute,
-      private router: Router
+      private router: Router,
+      private reporteService: ReporteService
     ) {}
 
     ngOnInit() {
@@ -52,9 +34,10 @@ export class ReportePage implements OnInit {
         this.route.snapshot.paramMap.get('idEquipo')
       );
 
-      this.reporte = this.reportesMock.find(
-        r => r.id === this.reporteId
-      );
+      this.reporte = this.reporteService.getReporteById(this.reporteId );
+      if (!this.reporte) {
+        console.error('Reporte no encontrado');
+      }
     }
 
     volver() {

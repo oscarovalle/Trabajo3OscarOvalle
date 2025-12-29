@@ -1,5 +1,5 @@
 .fondo-blanco {
-  background: #ffffff;
+  --background: #ffffff;
 }
 
 .titulo-principal {
@@ -16,14 +16,16 @@
 .label-form {
   display: block;
   color: #b0b0b0;
+  border-radius: 10px;
   font-weight: 600;
   margin-bottom: 6px;
 }
 
 .input-gris {
-  background: #f2f2f2;
-  border-radius: 8px;
+  --background: #f2f2f2;
+  border-radius: 20px;
   padding: 2px 8px;
+  color: #000000;
 }
 
 .foto-agregada {
