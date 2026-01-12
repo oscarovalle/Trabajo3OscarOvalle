@@ -7,6 +7,13 @@
     <ion-title class="titulo-app">
       Lista de equipos
     </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="mostrarPerfil($event)">
+        <ion-avatar>
+          <img [src]="usuario?.photoURL">
+        </ion-avatar>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 

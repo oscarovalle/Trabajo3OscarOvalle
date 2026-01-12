@@ -8,11 +8,17 @@ import { AppComponent } from './app/app.component';
 import { addIcons } from 'ionicons';
 import { trash, camera } from 'ionicons/icons';
 
+import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
+import { provideAuth, getAuth } from '@angular/fire/auth';
+import { environment } from './environments/environment';
+
 bootstrapApplication(AppComponent, {
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     provideIonicAngular(),
     provideRouter(routes, withPreloading(PreloadAllModules)),
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth())
   ],
 });
 

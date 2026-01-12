@@ -6,6 +6,9 @@ import { IonicModule } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ReporteService } from '../../services/reporte.service';
+import { AuthService } from '../../services/auth.service';
+import { PopoverController } from '@ionic/angular';
+import { PerfilPopoverComponent } from '../perfil-popover/perfil.popover';
 
 
 @Component({
@@ -18,9 +21,9 @@ import { ReporteService } from '../../services/reporte.service';
 export class IngresoreportePage implements OnInit {
 
   mostrarCalendario = false;
-
   idEquipo!: number;
   equipoId!: number;
+  usuario: any;
 
   reporte = {
     fecha: '',
@@ -32,7 +35,9 @@ export class IngresoreportePage implements OnInit {
 
   constructor(
     private alertCtrl: AlertController,
+    private popoverCtrl: PopoverController,
     private router: Router,
+    private authService: AuthService,
     private route: ActivatedRoute,
     private reporteService: ReporteService
   ) {}
@@ -43,6 +48,31 @@ export class IngresoreportePage implements OnInit {
     const hoy = new Date().toISOString();
     this.reporte.fecha = hoy;
     this.equipoId = Number(this.route.snapshot.paramMap.get('idEquipo'));
+    this.authService.getUser().subscribe(user => {
+      this.usuario = user;
+      console.log('Usuario Google:', user);
+      console.log('Foto URL:', user?.photoURL); 
+    });
+  }
+
+  async mostrarPerfil(ev: any) {
+    const popover = await this.popoverCtrl.create({
+      component: PerfilPopoverComponent,
+      event: ev,
+      componentProps: {
+        usuario: this.usuario,
+        onLogout: () => this.logout()
+      }
+    });
+  
+    await popover.present();
+  }
+  
+  
+  logout() {
+    this.authService.logout().then(() => {
+      this.router.navigate(['/inicio']);
+    });
   }
 
   abrirCalendario() {

@@ -4,6 +4,13 @@
       <ion-back-button (click)="volver()"></ion-back-button>
     </ion-buttons>
     <ion-title>Ingreso Reporte</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="mostrarPerfil($event)">
+        <ion-avatar>
+          <img [src]="usuario?.photoURL">
+        </ion-avatar>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 

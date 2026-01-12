@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-inicio',
@@ -13,9 +16,21 @@ import { IonicModule } from '@ionic/angular';
 })
 export class InicioPage implements OnInit {
 
-  constructor() { }
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
-  }
+  this.authService.getUser().subscribe(user => {
+    if (user) {
+      this.router.navigate(['/faena']);
+    }
+  });
+}
+
+loginGoogle() {
+  this.authService.loginWithGoogle();
+}
 
 }

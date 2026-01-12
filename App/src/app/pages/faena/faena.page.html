@@ -1,8 +1,18 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar color="light">
-    <ion-title class="titulo-app">
+
+    <ion-title slot="start">
       Faenas
     </ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="mostrarPerfil($event)">
+        <ion-avatar>
+          <img [src]="usuario?.photoURL">
+        </ion-avatar>
+      </ion-button>
+    </ion-buttons>
+
   </ion-toolbar>
 </ion-header>
 
